@@ -1,7 +1,8 @@
 
+import 'package:flash_market/components/custom_app_bar.dart';
+import 'package:flash_market/components/custom_widgets.dart';
 import 'package:flutter/material.dart';
 
-import '../../../components/custom_appbar_back.dart';
 import 'reset_password_form.dart';
 
 class Body extends StatelessWidget {
@@ -15,7 +16,12 @@ class Body extends StatelessWidget {
         alignment: Alignment.topRight,
         children: [
           const ResetPasswordForm(),
-          customAppbarBack(context),
+          CustomAppBar(
+              leftIconButton: backIconButton(context),
+              rightIconButton: plain(),
+              showRightIconButton: false,
+              showLeftIconButton: true,
+          ),
         ],
       ),
     );

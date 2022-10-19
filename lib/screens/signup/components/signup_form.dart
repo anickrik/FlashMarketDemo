@@ -22,69 +22,7 @@ String downArrow = "assets/icons/hr.svg";
 class _SignupFormState extends State<SignupForm> {
   bool _isObscure = false;
   final _formKey = GlobalKey<FormState>();
-  var _password;
-
-/*  Widget customFormInputField(String label, String hintText, bool iaObscure,
-      TextInputType keyboardType, bool isAsterisk) {
-    return SizedBox(
-      // height: getProportionateScreenHeight(58),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 26, bottom: 7),
-            child: isAsterisk
-                ? RichText(
-                    text: TextSpan(
-                      text: label,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: Colors.black),
-                      children: const [
-                        TextSpan(
-                          text: ' *',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: Colors.red),
-                        ),
-                      ],
-                    ),
-                  )
-                : RichText(
-                    text: TextSpan(
-                      text: label,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: Colors.black),
-                    ),
-                  ),
-          ),
-          TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Enter a $label';
-              }
-              return null;
-            },
-            style: const TextStyle(
-              fontSize: 18,
-            ),
-            keyboardType: keyboardType,
-            obscureText: iaObscure,
-            decoration: InputDecoration(
-              // floatingLabelBehavior: FloatingLabelBehavior.always,
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
-              hintText: hintText,
-            ),
-          ),
-        ],
-      ),
-    );
-  }*/
+  // var _password;
 
   @override
   Widget build(BuildContext context) {
@@ -120,17 +58,17 @@ class _SignupFormState extends State<SignupForm> {
                 customFormInputField('First Name', 'Enter Your First Name',
                     false, TextInputType.text, true),
                 SizedBox(
-                  height: getProportionateScreenHeight(18),
+                  height: getProportionateScreenHeight(10),
                 ),
                 customFormInputField('Last Name', 'Enter Your Last Name', false,
                     TextInputType.text, false),
                 SizedBox(
-                  height: getProportionateScreenHeight(18),
+                  height: getProportionateScreenHeight(10),
                 ),
                 customFormInputField('Email Id', 'i.e abc123@mail.com', false,
                     TextInputType.emailAddress, true),
                 SizedBox(
-                  height: getProportionateScreenHeight(18),
+                  height: getProportionateScreenHeight(10),
                 ),
                 customFormInputField(
                     'Mobile Number',
@@ -139,7 +77,7 @@ class _SignupFormState extends State<SignupForm> {
                     TextInputType.number,
                     true),
                 SizedBox(
-                  height: getProportionateScreenHeight(18),
+                  height: getProportionateScreenHeight(10),
                 ),
                 SizedBox(
                   // height: getProportionateScreenHeight(58),
@@ -176,10 +114,12 @@ class _SignupFormState extends State<SignupForm> {
                             }
                             return null;
                           },
-                          style: const TextStyle(fontSize: 18),
+                          style: const TextStyle(fontSize: 20, height: 1.2,
+                            ),
                           keyboardType: TextInputType.text,
                           obscureText: _isObscure,
                           decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.only(top:4, left: 15),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30)),
                             suffixIcon: IconButton(
@@ -255,20 +195,23 @@ class _SignupFormState extends State<SignupForm> {
                         ))
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("By signing up yor are Accepting the "),
-                    Text(
-                      'T&C',
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                    const Text(" and "),
-                    Text(
-                      'Privacy policy',
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                  ],
+                FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("By signing up yor are Accepting the "),
+                      Text(
+                        'T&C',
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                      const Text(" and "),
+                      Text(
+                        'Privacy policy',
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

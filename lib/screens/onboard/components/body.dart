@@ -62,10 +62,10 @@ class _BodyState extends State<Body> {
   }
 
   _storeOnboardInfo() async {
-    print("Shared pref called");
+    // print("Shared pref called");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('isFirstTime', true);
-    print(prefs.getBool('isFirstTime'));
+    // print(prefs.getBool('isFirstTime'));
   }
 
   @override
@@ -152,8 +152,8 @@ class _BodyState extends State<Body> {
                     curve: Curves.easeInCirc);
           },
           icon: (currentIndex == (screens.length - 1))
-              ? Text("Get Started", style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.w600),)
-              : Text('Next', style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.w600)),
+              ? Text("Get Started", style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),)
+              : Text('Next', style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold, fontStyle: FontStyle.italic)),
           label: Icon(Icons.arrow_forward_ios,color: Theme.of(context).primaryColor),
           backgroundColor: Colors.white,
         ),

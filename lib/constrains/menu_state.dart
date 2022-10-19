@@ -1,0 +1,1 @@
+enum MenuState { home, nearMe, shop, notification, profile }

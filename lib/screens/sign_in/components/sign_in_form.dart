@@ -1,6 +1,5 @@
 import 'package:flash_market/components/full_width_button.dart';
 import 'package:flash_market/components/header_title.dart';
-import 'package:flash_market/constrains/constants.dart';
 import 'package:flash_market/screens/reset_password/reset_password_screen.dart';
 import 'package:flash_market/screens/signup/signup_screen.dart';
 import 'package:flash_market/size_config.dart';
@@ -8,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../components/custom_form_input_field.dart';
+import '../../../components/form_error.dart';
+import '../../../constrains/constants.dart';
+import '../../../helper/keyboard.dart';
 import '../../otp/components/body.dart';
 
 class SignInForm extends StatefulWidget {
@@ -20,8 +22,33 @@ class SignInForm extends StatefulWidget {
 bool _isObscure = false;
 
 class _SignInFormState extends State<SignInForm> {
+  FocusNode email = FocusNode();
+  FocusNode pass = FocusNode();
+  FocusNode button = FocusNode();
+  final _formKey = GlobalKey<FormState>();
+  String? username;
+  String? password;
+  final List<String?> errors = [];
+
+  void addError({String? error}) {
+    if (!errors.contains(error)) {
+      setState(() {
+        errors.add(error);
+      });
+    }
+  }
+
+  void removeError({String? error}) {
+    if (errors.contains(error)) {
+      setState(() {
+        errors.remove(error);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.only(top: 52, left: 15, right: 15, bottom: 15),
@@ -29,6 +56,7 @@ class _SignInFormState extends State<SignInForm> {
         width: SizeConfig.screenWidth,
         child: SingleChildScrollView(
           child: Form(
+            key: _formKey,
             child: Column(
               children: [
                 SizedBox(
@@ -51,69 +79,21 @@ class _SignInFormState extends State<SignInForm> {
                 SizedBox(
                   height: getProportionateScreenHeight(30),
                 ),
-                customFormInputField('Email or Mobile Number',
-                    'i.e abc@mail.com', false, TextInputType.text, true),
-                SizedBox(
-                  height: getProportionateScreenHeight(30),
+                CustomFormInputField(
+                  label: 'Email or Mobile Number',
+                  isAsterisk: true,
+                  textFormField: emailInputFormField(),
                 ),
+
+                // customFormInputField('Email or Mobile Number',
+                //     'i.e abc@mail.com', false, TextInputType.text, true),
                 SizedBox(
-                  // height: getProportionateScreenHeight(58),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 26, bottom: 5),
-                          child: RichText(
-                            text: const TextSpan(
-                              text: 'Password',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
-                                  color: Colors.black),
-                              children: [
-                                TextSpan(
-                                  text: ' *',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18,
-                                      color: Colors.red),
-                                ),
-                              ],
-                            ),
-                          )),
-                      SizedBox(
-                        height: defaultInputFieldHeight,
-                        child: TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Enter a Password';
-                            }
-                            return null;
-                          },
-                          textAlignVertical: TextAlignVertical.center,
-                          style: const TextStyle(fontSize: 18),
-                          keyboardType: TextInputType.text,
-                          obscureText: _isObscure,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _isObscure
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _isObscure = !_isObscure;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  height: getProportionateScreenHeight(10),
+                ),
+                CustomFormInputField(
+                  label: 'Password',
+                  isAsterisk: true,
+                  textFormField: passInputFormField(),
                 ),
                 SizedBox(
                   height: getProportionateScreenHeight(1),
@@ -130,10 +110,21 @@ class _SignInFormState extends State<SignInForm> {
                     const Text("Show password"),
                   ],
                 ),
+                FormError(errors: errors),
                 SizedBox(
                   height: getProportionateScreenHeight(20),
                 ),
-                FullWidthButton(onPress: () {}, title: 'Login', textSize: 28,),
+                FullWidthButton(
+                  title: 'Login',
+                  textSize: 28,
+                  onPress: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      // if all are valid then go to success screen
+                      KeyboardUtil.hideKeyboard(context);
+                    }
+                  },
+                ),
                 SizedBox(
                   height: getProportionateScreenHeight(20),
                 ),
@@ -147,7 +138,7 @@ class _SignInFormState extends State<SignInForm> {
                         color: Theme.of(context).primaryColor,
                         fontSize: 20,
                         fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w700),
+                        fontWeight: FontWeight.w700),
                   ),
                 ),
                 SizedBox(
@@ -163,7 +154,8 @@ class _SignInFormState extends State<SignInForm> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, SignupScreen.routeName);
+                        Navigator.pushReplacementNamed(
+                            context, SignupScreen.routeName);
                       },
                       child: Text(
                         'Sign up',
@@ -182,4 +174,85 @@ class _SignInFormState extends State<SignInForm> {
       ),
     );
   }
+
+  TextFormField passInputFormField() {
+    return TextFormField(
+      focusNode: pass,
+      onSaved: (newValue) => password = newValue,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          return;
+        } else if (value.length >= 8) {
+          return;
+        }
+        return;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "Please Enter your password";
+        } else if (value.length < 8) {
+          return "Password is too short";
+        }
+        return null;
+      },
+      // textAlignVertical: TextAlignVertical.center,
+      style: const TextStyle(fontSize: 20, height: 1.2),
+      keyboardType: TextInputType.text,
+      obscureText: _isObscure,
+      decoration: InputDecoration(
+        hintText: "Enter Password",
+        suffixIcon: IconButton(
+          icon: Icon(
+            _isObscure ? Icons.visibility : Icons.visibility_off,
+          ),
+          onPressed: () {
+            setState(() {
+              _isObscure = !_isObscure;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  TextFormField emailInputFormField(){
+    return TextFormField(
+      onSaved: (newValue) {
+        username = newValue;
+        },
+      onFieldSubmitted: (value){
+        email.unfocus();
+        FocusScope.of(context).requestFocus(pass);
+      },
+      focusNode: email,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          return;
+        } else if (emailValidatorRegExp.hasMatch(value)) {
+          return;
+        }
+        return;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return kEmailNullError;
+        } else if (!emailValidatorRegExp.hasMatch(value)) {
+          return kInvalidEmailError;
+        }
+        return null;
+      },
+      textAlignVertical: TextAlignVertical.center,
+      style: const TextStyle(
+        height: 1.2,
+        fontSize: 20,
+      ),
+      keyboardType: TextInputType.text,
+      obscureText: false,
+      decoration: const InputDecoration(
+        hintText: "i.e abc@mail.com",
+      ),
+    );
+  }
+
+
 }

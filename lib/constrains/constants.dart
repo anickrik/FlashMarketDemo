@@ -1,15 +1,17 @@
+import 'package:flash_market/constrains/fm_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../size_config.dart';
 
-const kPrimaryColor = Color(0xFFFF7643);
+final kPrimaryColor = FmColors().mPrimaryColor;
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
   colors: [Color(0xFFFFA53E), Color(0xFFFF7643)],
 );
-const kSecondaryColor = Color(0xFF979797);
+final kSecondaryColor = FmColors().fmGray3;
+final kGrayColor = FmColors().fmGray5;
 const kTextColor = Color(0xFF757575);
 
 const kAnimationDuration = Duration(milliseconds: 200);
@@ -22,7 +24,7 @@ final headingStyle = TextStyle(
 );
 
 const defaultDuration = Duration(milliseconds: 250);
-final defaultInputFieldHeight = null;
+const defaultInputFieldHeight = null;
 
 // Form Error
 final RegExp emailValidatorRegExp =

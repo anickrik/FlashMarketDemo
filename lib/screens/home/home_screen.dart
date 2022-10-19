@@ -1,6 +1,5 @@
-import 'package:flash_market/screens/onboard/onboard_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flash_market/screens/home/components/home_screen_body.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = '/home';
@@ -8,22 +7,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: AppBar(
-        title: const Text('homePage'),
-        actions: [
-          IconButton(onPressed: () async {
-            print('Resetting Shared Preference value');
-            final prefs = await SharedPreferences.getInstance();
-            prefs.setBool('isFirstTime', false);
-            print(prefs.getBool('isFirstTime'));
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const OnboardScreen()));
-          }, icon: const Icon(Icons.logout_outlined))
-        ],
-      ),
-      body: const Center(
-        child: Text('HomePage'),
-      ),
+    return const Scaffold(
+      body: HomeScreenBody(),
     );
   }
 }

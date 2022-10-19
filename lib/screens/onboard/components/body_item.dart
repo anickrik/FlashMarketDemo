@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../size_config.dart';
 
 class BodyItem extends StatelessWidget {
@@ -12,7 +10,6 @@ class BodyItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(

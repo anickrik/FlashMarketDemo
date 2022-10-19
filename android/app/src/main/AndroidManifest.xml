@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flash_market">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="flash_market"
+        android:label="Flash Market"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,4 +1,6 @@
-import 'package:flash_market/components/custom_appbar_icon_skip.dart';
+
+import 'package:flash_market/components/custom_app_bar.dart';
+import 'package:flash_market/components/custom_widgets.dart';
 
 import 'package:flash_market/screens/signup/components/signup_form.dart';
 
@@ -10,7 +12,6 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         // appBar: AppBar(
@@ -22,9 +23,14 @@ class Body extends StatelessWidget {
         // ),
         body: Stack(
           alignment: Alignment.topRight,
-          children: const [
-            SignupForm(),
-            CustomAppbarIconSkip()
+          children: [
+            const SignupForm(),
+            CustomAppBar(
+                leftIconButton: plain(),
+                rightIconButton: skipButton(context),
+                showRightIconButton: true,
+                showLeftIconButton: false,
+            ),
           ],
         ),
       ),
