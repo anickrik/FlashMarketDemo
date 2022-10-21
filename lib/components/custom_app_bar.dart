@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../constrains/fm_colors.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget{
   final Widget leftIconButton;
@@ -33,7 +32,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget{
       // height: SizeConfig.screenHeight * .07,
       // width: SizeConfig.screenWidth,
       padding: const EdgeInsets.only(left: 7.0, right: 7.0,  top: 6.0),
-      color: FmColors().fmGray3,
+      color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

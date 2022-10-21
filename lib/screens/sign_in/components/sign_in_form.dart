@@ -1,15 +1,20 @@
-import 'package:flash_market/components/full_width_button.dart';
-import 'package:flash_market/components/header_title.dart';
-import 'package:flash_market/screens/reset_password/reset_password_screen.dart';
-import 'package:flash_market/screens/signup/signup_screen.dart';
-import 'package:flash_market/size_config.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+
+
+import '../../../components/full_width_button.dart';
+import '../../../components/header_title.dart';
+import '../../home/home_screen.dart';
+import '../../reset_password/reset_password_screen.dart';
+import '../../signup/signup_screen.dart';
+import '../../../size_config.dart';
 import '../../../components/custom_form_input_field.dart';
-import '../../../components/form_error.dart';
 import '../../../constrains/constants.dart';
 import '../../../helper/keyboard.dart';
+import '../../../provider/auth.dart';
 import '../../otp/components/body.dart';
 
 class SignInForm extends StatefulWidget {
@@ -26,24 +31,29 @@ class _SignInFormState extends State<SignInForm> {
   FocusNode pass = FocusNode();
   FocusNode button = FocusNode();
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   String? username;
   String? password;
-  final List<String?> errors = [];
 
-  void addError({String? error}) {
-    if (!errors.contains(error)) {
-      setState(() {
-        errors.add(error);
-      });
-    }
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    email.unfocus();
+    pass.unfocus();
+    super.dispose();
   }
 
-  void removeError({String? error}) {
-    if (errors.contains(error)) {
-      setState(() {
-        errors.remove(error);
-      });
-    }
+
+  Future<void> _submit() async {
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+        // if all are valid then go to success screen
+        KeyboardUtil.hideKeyboard(context);
+      }
+      await Provider.of<Auth>(context, listen: false).logIn(username!.trim(), password!.trim());
+      Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
   }
 
   @override
@@ -80,7 +90,7 @@ class _SignInFormState extends State<SignInForm> {
                   height: getProportionateScreenHeight(30),
                 ),
                 CustomFormInputField(
-                  label: 'Email or Mobile Number',
+                  label: 'Mobile Number',
                   isAsterisk: true,
                   textFormField: emailInputFormField(),
                 ),
@@ -98,32 +108,26 @@ class _SignInFormState extends State<SignInForm> {
                 SizedBox(
                   height: getProportionateScreenHeight(1),
                 ),
-                Row(
-                  children: [
-                    Checkbox(
-                        value: !_isObscure,
-                        onChanged: (_) {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                          });
-                        }),
-                    const Text("Show password"),
-                  ],
-                ),
-                FormError(errors: errors),
+                // Row(
+                //   children: [
+                //     Checkbox(
+                //         value: !_isObscure,
+                //         onChanged: (_) {
+                //           setState(() {
+                //             _isObscure = !_isObscure;
+                //           });
+                //         }),
+                //     const Text("Show password"),
+                //   ],
+                // ),
+                // FormError(errors: errors),
                 SizedBox(
                   height: getProportionateScreenHeight(20),
                 ),
                 FullWidthButton(
                   title: 'Login',
                   textSize: 28,
-                  onPress: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      // if all are valid then go to success screen
-                      KeyboardUtil.hideKeyboard(context);
-                    }
-                  },
+                  onPress: _submit
                 ),
                 SizedBox(
                   height: getProportionateScreenHeight(20),
@@ -175,9 +179,55 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 
+
+  TextFormField emailInputFormField(){
+    return TextFormField(
+      controller: _emailController,
+      onSaved: (newValue) {
+        username = newValue;
+      },
+      onFieldSubmitted: (value){
+        email.unfocus();
+        FocusScope.of(context).requestFocus(pass);
+      },
+      focusNode: email,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+            return;
+        } else if (emailValidatorRegExp.hasMatch(value) || value.length == 10) {
+          return;
+        }
+        return;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return kPhoneNumberNullError;
+        } else if (/*!emailValidatorRegExp.hasMatch(value) ||*/ value.length < 10) {
+          return kPhoneNumberLen;
+        }
+        return null;
+      },
+      textAlignVertical: TextAlignVertical.center,
+      style: const TextStyle(
+        height: 1.2,
+        fontSize: 20,
+      ),
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        LengthLimitingTextInputFormatter(10)
+      ],
+      keyboardType: TextInputType.number,
+      obscureText: false,
+      decoration: const InputDecoration(
+        hintText: "9898989898",
+      ),
+    );
+  }
+
   TextFormField passInputFormField() {
     return TextFormField(
       focusNode: pass,
+      controller: _passwordController,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -197,7 +247,7 @@ class _SignInFormState extends State<SignInForm> {
       },
       // textAlignVertical: TextAlignVertical.center,
       style: const TextStyle(fontSize: 20, height: 1.2),
-      keyboardType: TextInputType.text,
+      keyboardType: TextInputType.visiblePassword,
       obscureText: _isObscure,
       decoration: InputDecoration(
         hintText: "Enter Password",
@@ -215,44 +265,9 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 
-  TextFormField emailInputFormField(){
-    return TextFormField(
-      onSaved: (newValue) {
-        username = newValue;
-        },
-      onFieldSubmitted: (value){
-        email.unfocus();
-        FocusScope.of(context).requestFocus(pass);
-      },
-      focusNode: email,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          return;
-        } else if (emailValidatorRegExp.hasMatch(value)) {
-          return;
-        }
-        return;
-      },
-      validator: (value) {
-        if (value!.isEmpty) {
-          return kEmailNullError;
-        } else if (!emailValidatorRegExp.hasMatch(value)) {
-          return kInvalidEmailError;
-        }
-        return null;
-      },
-      textAlignVertical: TextAlignVertical.center,
-      style: const TextStyle(
-        height: 1.2,
-        fontSize: 20,
-      ),
-      keyboardType: TextInputType.text,
-      obscureText: false,
-      decoration: const InputDecoration(
-        hintText: "i.e abc@mail.com",
-      ),
-    );
-  }
+
+
+
 
 
 }

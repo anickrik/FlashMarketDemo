@@ -18,7 +18,7 @@ class FeaturedBusinessItemCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        height: getProportionateScreenHeight(200),
+        // height: getProportionateScreenHeight(200),
         width: getProportionateScreenWidth(300),
         margin: const EdgeInsets.only(top: 15, left: 8, bottom: 20),
         child: Card(
@@ -93,7 +93,7 @@ class FeaturedBusinessItemCard extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10, bottom: 12),
+                    padding: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
                     child: Text(aboutMerchant,
                       maxLines: 2,
                       textAlign: TextAlign.start,
@@ -108,86 +108,3 @@ class FeaturedBusinessItemCard extends StatelessWidget {
     );
   }
 }
-
-//
-// Widget featuredBusinessItemCard(){
-//   return Padding(
-//     padding: const EdgeInsets.all(10.0),
-//     child: Container(
-//       height: getProportionateScreenHeight(200),
-//       width: getProportionateScreenWidth(300),
-//       margin: const EdgeInsets.only(top: 15, left: 8, bottom: 20),
-//       child: Card(
-//         elevation: 4,
-//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-//         child: ClipRRect(
-//           borderRadius: BorderRadius.circular(10),
-//           child: Column(
-//             children: [
-//               Stack(
-//                 alignment: Alignment.topRight,
-//                 children: [
-//                   SizedBox(
-//                     height: getProportionateScreenHeight(120),
-//                   width: double.infinity,
-//                     child: Image.asset(
-//                       "assets/images/store_banner.png",
-//                       fit: BoxFit.cover,
-//                     ),
-//                   ),
-//                   Padding(
-//                     padding: const EdgeInsets.all(10.0),
-//                     child: CircleAvatar(
-//                        radius: 23,
-//                       backgroundColor: const Color.fromRGBO(255, 245, 255, 90),
-//                       child: IconButton(
-//                           onPressed: () {},
-//                           icon: const Icon(
-//                             Icons.share,
-//                             size: 30,
-//                             color: Colors.black,
-//                           )),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               Padding(
-//                 padding: const EdgeInsets.all(10.0),
-//                 child: Row(
-//                   children: [
-//                     CircleAvatar(
-//                       child: ClipRRect(
-//                           borderRadius: BorderRadius.circular(30),
-//                           child: Image.asset("assets/images/nike.png", fit: BoxFit.cover,)),
-//                     ),
-//                     const SizedBox (width: 12,),
-//                     Column(
-//                       children: const [
-//                         Text("Nike Store", style: TextStyle(
-//                           fontWeight: FontWeight.bold,
-//                           fontSize: 16
-//                         ),),
-//                         SizedBox(height: 4,),
-//                         Text("7km wangara",style: TextStyle(color: Colors.black45),),
-//                       ],
-//                     ),
-//                     const Spacer(),
-//                     IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_border, size: 32,))
-//                   ],
-//                 ),
-//               ),
-//               const Padding(
-//                 padding: EdgeInsets.only(left: 10, right: 10, bottom: 12),
-//                 child: Text("Nike Retail Group sources products from local retailers and sells them on the Flash Market Marketplace. Sales are direct...",
-//                   maxLines: 2,
-//                   textAlign: TextAlign.start,
-//                   style: TextStyle(color: Colors.black45, fontSize: 12),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         )
-//       ),
-//     ),
-//   );
-// }

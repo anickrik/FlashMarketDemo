@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'constrains/constants.dart';
 import 'constrains/fm_colors.dart';
 
 ThemeData theme() {
@@ -36,6 +35,7 @@ InputDecorationTheme inputDecorationTheme() {
     contentPadding: const EdgeInsets.only(top:4, left: 15),
     enabledBorder: outlineInputBorder,
     focusedBorder: outlineInputBorder,
+    errorBorder: outlineInputBorderColored,
     border: outlineInputBorder,
   );
 }

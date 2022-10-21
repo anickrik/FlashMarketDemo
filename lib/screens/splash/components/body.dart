@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../home/home_screen.dart';
@@ -46,7 +47,7 @@ class _BodyState extends State<Body> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(child: Image.asset("assets/images/group.png",width: getProportionateScreenWidth(200),)),
+          Center(child: SvgPicture.asset("assets/icons/flash-market.svg",width: getProportionateScreenWidth(200),)),
           //set the logo image for center
           SizedBox(
             height: getProportionateScreenHeight(37),

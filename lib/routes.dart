@@ -1,6 +1,7 @@
 
 import 'package:flash_market/screens/change_password/change_password_screen.dart';
 import 'package:flash_market/screens/home/home_screen.dart';
+import 'package:flash_market/screens/near_me/near_me_screen.dart';
 import 'package:flash_market/screens/onboard/onboard_screen.dart';
 import 'package:flash_market/screens/otp/otp_screen.dart';
 import 'package:flash_market/screens/reset_password/reset_password_screen.dart';
@@ -19,5 +20,6 @@ final Map<String, WidgetBuilder> routes = {
   HomeScreen.routeName: (context) => const HomeScreen(),
   ResetPasswordScreen.routeName: (context) => const ResetPasswordScreen(),
   ChangePasswordScreen.routeName: (context) => const ChangePasswordScreen(),
+  NearMeScreen.routeName: (context) => const NearMeScreen(),
 
 };

@@ -4,7 +4,8 @@ import '../screens/home/home_screen.dart';
 import '../size_config.dart';
 
 Widget backIconButton(BuildContext context) {
-  return SizedBox(
+  return Container(
+    margin: EdgeInsets.only(right: getProportionateScreenWidth(20)),
       height: getProportionateScreenHeight(40),
       width: getProportionateScreenWidth(40),
       child: Card(
@@ -39,21 +40,22 @@ Widget skipButton(
   return Container(
           height: getProportionateScreenHeight(35),
           width: getProportionateScreenWidth(60),
+          margin: EdgeInsets.only(left: getProportionateScreenWidth(10)),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               border:
                   Border.all(width: 2, color: Theme.of(context).primaryColor)),
-          child: TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, HomeScreen.routeName);
-              // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
-            },
-            child: const FittedBox(
-              fit: BoxFit.contain,
-              child: Text(
-                'Skip',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
+            child: TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, HomeScreen.routeName);
+                // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const HomeScreen()));
+              },
+              child: const Text(
+                  'Skip',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
             ),
           ),
   );
@@ -94,5 +96,11 @@ Widget cartIconButton(BuildContext context) {
           ),
         ),
       ),
+  );
+}
+
+Widget emptyCard(){
+  return Card(
+    color: Colors.orange,
   );
 }

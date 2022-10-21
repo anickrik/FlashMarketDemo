@@ -19,7 +19,7 @@ class CustomItemContainerHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Container(
       //defalt height should be 460
-      height: containerHeight + 10,
+      height: containerHeight,
       width: double.infinity,
       color: containerBgColor,
       child: Column(
@@ -36,7 +36,7 @@ class CustomItemContainerHomeScreen extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: containerHeight - 60,
+            height: containerHeight - 70,
             width: double.infinity,
             child: childWidget
           ),

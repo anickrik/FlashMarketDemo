@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import '../../../components/custom_app_bar.dart';
 
 class HomeScreenBody extends StatelessWidget {
-  static const routeName = '/home';
   const HomeScreenBody({Key? key}) : super(key: key);
 
   @override

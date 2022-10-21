@@ -1,4 +1,5 @@
 import 'package:flash_market/constrains/constants.dart';
+import 'package:flash_market/screens/near_me/near_me_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -55,7 +56,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                     : SvgPicture.asset(
                         "assets/icons/location.svg",
                       ),
-                onPressed: () {}),
+                onPressed: () =>  Navigator.pushNamed(context, NearMeScreen.routeName),),
             IconButton(
                 icon: MenuState.shop == selectedMenu
                     ? SvgPicture.asset(

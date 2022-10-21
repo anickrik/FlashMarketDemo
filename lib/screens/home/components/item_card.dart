@@ -76,7 +76,7 @@ class ItemCard extends StatelessWidget {
                     ),
                   ),
                   showFlashHours ? Padding(
-                    padding: const EdgeInsets.only(left: 11.0, top: 130, right: 11),
+                    padding: const EdgeInsets.only(left: 11.0, top: 140, right: 11),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -126,6 +126,7 @@ class ItemCard extends StatelessWidget {
                   const SizedBox(),
                 ],
               ),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
                 child: Column(
@@ -146,8 +147,9 @@ class ItemCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8,),
+              const Spacer(),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.only(left : 10.0, right: 10.0, bottom: 20.0),
                 child: FittedBox(
                   fit: BoxFit.contain,
                   child: Row(
