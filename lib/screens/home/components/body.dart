@@ -1,4 +1,5 @@
 
+import 'package:flash_market/screens/home/components/recommended_for_you_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,6 +45,7 @@ class _BodyState extends State<Body> {
               );
             } else {
               return SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -149,32 +151,37 @@ class _BodyState extends State<Body> {
                     ),
 
                     //Recommended For You
-                    //RecentViewed Products
-                    CustomItemContainerHomeScreen(
-                      containerTitle: "Recommended for you",
-                      containerTitleColor: Colors.black,
-                      containerBgColor: kGrayColor,
-                      buttonColor: kPrimaryColor,
-                      buttonTextColor: Colors.white,
-                      containerHeight: getProportionateScreenHeight(450),
-                      childWidget: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount:
-                            snapshot.data!.result?.recentVisitedDeals?.length,
-                        itemBuilder: (context, index) => ItemCard(
-                          showFlashHours: false,
-                          saleImage: snapshot.data?.result?.recentVisitedDeals?[index].saleImage as String,
-                          saleTitle: snapshot.data?.result?.recentVisitedDeals?[index].saleTitle as String,
-                          price: snapshot.data?.result?.recentVisitedDeals?[index].price as String,
-                          oldPrice: snapshot.data?.result?.recentVisitedDeals?[index].oldPrice as String,
-                          pricePercentage: snapshot.data?.result?.recentVisitedDeals?[index].pricePercent as String,
-                          timeRemaining: snapshot.data?.result?.recentVisitedDeals?[index].timeRemaining as String,
-                          merchantName: snapshot.data?.result?.recentVisitedDeals?[index].merchantName as String,
-                          merchantLogo: snapshot.data?.result?.recentVisitedDeals?[index].merchantLogo as String,
-                          distance: snapshot.data?.result?.recentVisitedDeals?[index].distance as String,
-                        ),
-                      ),
+                    //RecentViewed Products'
+
+                    RecommendedForYouContainer(
+                        recentVisitedDeals: snapshot.data!.result?.recentVisitedDeals as List<RecentVisitedDeals>
                     ),
+
+                    // CustomItemContainerHomeScreen(
+                    //   containerTitle: "Recommended for you",
+                    //   containerTitleColor: Colors.black,
+                    //   containerBgColor: kGrayColor,
+                    //   buttonColor: kPrimaryColor,
+                    //   buttonTextColor: Colors.white,
+                    //   containerHeight: getProportionateScreenHeight(450),
+                    //   childWidget: ListView.builder(
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemCount:
+                    //         snapshot.data!.result?.recentVisitedDeals?.length,
+                    //     itemBuilder: (context, index) => ItemCard(
+                    //       showFlashHours: false,
+                    //       saleImage: snapshot.data?.result?.recentVisitedDeals?[index].saleImage as String,
+                    //       saleTitle: snapshot.data?.result?.recentVisitedDeals?[index].saleTitle as String,
+                    //       price: snapshot.data?.result?.recentVisitedDeals?[index].price as String,
+                    //       oldPrice: snapshot.data?.result?.recentVisitedDeals?[index].oldPrice as String,
+                    //       pricePercentage: snapshot.data?.result?.recentVisitedDeals?[index].pricePercent as String,
+                    //       timeRemaining: snapshot.data?.result?.recentVisitedDeals?[index].timeRemaining as String,
+                    //       merchantName: snapshot.data?.result?.recentVisitedDeals?[index].merchantName as String,
+                    //       merchantLogo: snapshot.data?.result?.recentVisitedDeals?[index].merchantLogo as String,
+                    //       distance: snapshot.data?.result?.recentVisitedDeals?[index].distance as String,
+                    //     ),
+                    //   ),
+                    // ),
 
                     //Featured Business
                     CustomItemContainerHomeScreen(

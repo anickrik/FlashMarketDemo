@@ -45,7 +45,7 @@ class _BodyState extends State<Body> {
                       containerBgColor: kGrayColor,
                       buttonColor: kPrimaryColor,
                       buttonTextColor: Colors.white,
-                      containerHeight: getProportionateScreenHeight(450),
+                      containerHeight: getProportionateScreenHeight(480),
                       childWidget: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: snapshot.data!.result?.featuredDeals?.length,
@@ -78,7 +78,7 @@ class _BodyState extends State<Body> {
                       containerBgColor: kPrimaryColor,
                       buttonColor: Colors.white,
                       buttonTextColor: kPrimaryColor,
-                      containerHeight: getProportionateScreenHeight(350),
+                      containerHeight: getProportionateScreenHeight(390),
                       childWidget: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: snapshot.data!.result?.localBusiness?.length,

@@ -13,40 +13,43 @@ class NearMeDeals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding:
-              const EdgeInsets.only(left: 14, top: 24, right: 10, bottom: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const LabelTitle(title: "All Near Me", textColor: Colors.black),
-              ViewAllButton(
-                text: "View All",
-                textColor: Colors.white,
-                buttonColor: kPrimaryColor,
-              ),
-            ],
+    return Container(
+      color: kGrayColor,
+      child: Column(
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 14, top: 24, right: 10, bottom: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const LabelTitle(title: "All Near Me", textColor: Colors.black),
+                ViewAllButton(
+                  text: "View All",
+                  textColor: Colors.white,
+                  buttonColor: kPrimaryColor,
+                ),
+              ],
+            ),
           ),
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          itemCount: nearMeDeals.length,
-          itemBuilder: (context, index) => NearMeItemCard(
-            saleImage: nearMeDeals[index].saleImage as String,
-            saleTitle: nearMeDeals[index].saleTitle as String,
-            oldPrice: nearMeDeals[index].oldPrice as String,
-            price: nearMeDeals[index].price as String,
-            pricePercent: nearMeDeals[index].pricePercent as String,
-            merchantLogo: nearMeDeals[index].merchantLogo as String,
-            merchantName: nearMeDeals[index].merchantName as String,
-            distance: nearMeDeals[index].distance as String,
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            itemCount: nearMeDeals.length,
+            itemBuilder: (context, index) => NearMeItemCard(
+              saleImage: nearMeDeals[index].saleImage as String,
+              saleTitle: nearMeDeals[index].saleTitle as String,
+              oldPrice: nearMeDeals[index].oldPrice as String,
+              price: nearMeDeals[index].price as String,
+              pricePercent: nearMeDeals[index].pricePercent as String,
+              merchantLogo: nearMeDeals[index].merchantLogo as String,
+              merchantName: nearMeDeals[index].merchantName as String,
+              distance: nearMeDeals[index].distance as String,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

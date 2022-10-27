@@ -46,7 +46,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                       "assets/icons/home.svg",
                     ),
               onPressed: () =>
-                  Navigator.pushNamed(context, HomeScreen.routeName),
+                  Navigator.popAndPushNamed(context, HomeScreen.routeName),
             ),
             IconButton(
                 icon: MenuState.nearMe == selectedMenu
@@ -56,7 +56,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                     : SvgPicture.asset(
                         "assets/icons/location.svg",
                       ),
-                onPressed: () =>  Navigator.pushNamed(context, NearMeScreen.routeName),),
+                onPressed: () =>  Navigator.popAndPushNamed(context, NearMeScreen.routeName),),
             IconButton(
                 icon: MenuState.shop == selectedMenu
                     ? SvgPicture.asset(
