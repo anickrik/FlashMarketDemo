@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
-import 'package:flash_market/model/flash_market_model.dart';
-import 'package:flash_market/model/login/login_model.dart';
+import 'package:flash_market/model/home/flash_market_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../model/login/login_model.dart';
 
 
 class Auth with ChangeNotifier {

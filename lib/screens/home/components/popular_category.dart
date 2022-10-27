@@ -1,4 +1,4 @@
-import 'package:flash_market/model/flash_market_model.dart';
+import 'package:flash_market/model/home/flash_market_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../components/label_title.dart';

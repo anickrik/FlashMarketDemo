@@ -7,7 +7,7 @@ import 'package:flash_market/provider/auth.dart';
 
 import '../../../components/custom_item_container_home_screen.dart';
 import '../../../constrains/constants.dart';
-import '../../../model/flash_market_model.dart';
+import '../../../model/home/flash_market_model.dart';
 import '../../../size_config.dart';
 
 import 'banner_box.dart';

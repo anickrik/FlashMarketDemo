@@ -3,7 +3,7 @@ import 'package:flash_market/constrains/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../model/flash_market_model.dart';
+import '../../../model/home/flash_market_model.dart';
 import '../../../provider/auth.dart';
 import '../../../size_config.dart';
 import '../../home/components/featured_business_item_card.dart';

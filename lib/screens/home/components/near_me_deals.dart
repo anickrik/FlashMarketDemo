@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../components/label_title.dart';
 import '../../../components/view_all_button.dart';
 import '../../../constrains/constants.dart';
-import '../../../model/flash_market_model.dart';
+import '../../../model/home/flash_market_model.dart';
 import 'near_me_item_card.dart';
 
 class NearMeDeals extends StatelessWidget {
